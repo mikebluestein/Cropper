@@ -20,17 +20,20 @@ namespace Cropper.iOS
         {
         }
 
-        protected override void OnModelSet (VisualElement model)
+        protected override void OnElementChanged (VisualElementChangedEventArgs e)
         {
-            base.OnModelSet (model);
-
-            var page = model as CropperPage;
+            base.OnElementChanged (e);
+           
+            var page = e.NewElement as CropperPage;
             var view = NativeView;
 
             var label = new UILabel (new RectangleF(20, 40, view.Frame.Width-40, 40));
             label.AdjustsFontSizeToFitWidth = true;
             label.TextColor = UIColor.White;
-            label.Text = page.Text;
+
+            if (page != null) {
+                label.Text = page.Text;
+            }
 
             view.Add (label);
         }

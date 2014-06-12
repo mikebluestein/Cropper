@@ -5,8 +5,6 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Cropper", "Cropper\Cropper.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cropper.iOS", "iOS\Cropper.iOS.csproj", "{169880AD-052C-478C-9ECD-60E92A5CD365}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cropper.Android", "Android\Cropper.Android.csproj", "{42D2287F-4B96-4294-8315-148646133B8E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|iPhoneSimulator = Debug|iPhoneSimulator
@@ -35,22 +33,6 @@ Global
 		{169880AD-052C-478C-9ECD-60E92A5CD365}.Release|iPhone.Build.0 = Release|iPhone
 		{169880AD-052C-478C-9ECD-60E92A5CD365}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{169880AD-052C-478C-9ECD-60E92A5CD365}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
-		{42D2287F-4B96-4294-8315-148646133B8E}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
-		{42D2287F-4B96-4294-8315-148646133B8E}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
-		{42D2287F-4B96-4294-8315-148646133B8E}.AppStore|iPhone.ActiveCfg = Release|Any CPU
-		{42D2287F-4B96-4294-8315-148646133B8E}.AppStore|iPhone.Build.0 = Release|Any CPU
-		{42D2287F-4B96-4294-8315-148646133B8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{42D2287F-4B96-4294-8315-148646133B8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{42D2287F-4B96-4294-8315-148646133B8E}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{42D2287F-4B96-4294-8315-148646133B8E}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{42D2287F-4B96-4294-8315-148646133B8E}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{42D2287F-4B96-4294-8315-148646133B8E}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{42D2287F-4B96-4294-8315-148646133B8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{42D2287F-4B96-4294-8315-148646133B8E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{42D2287F-4B96-4294-8315-148646133B8E}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{42D2287F-4B96-4294-8315-148646133B8E}.Release|iPhone.Build.0 = Release|Any CPU
-		{42D2287F-4B96-4294-8315-148646133B8E}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{42D2287F-4B96-4294-8315-148646133B8E}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{D1C226CE-0CE9-457F-B23F-CF9537FDD4AD}.Ad-Hoc|iPhone.ActiveCfg = Debug|iPhoneSimulator
 		{D1C226CE-0CE9-457F-B23F-CF9537FDD4AD}.Ad-Hoc|iPhone.Build.0 = Debug|iPhoneSimulator
 		{D1C226CE-0CE9-457F-B23F-CF9537FDD4AD}.AppStore|iPhone.ActiveCfg = Debug|iPhoneSimulator
