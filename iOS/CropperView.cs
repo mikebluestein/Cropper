@@ -1,19 +1,17 @@
-﻿using System;
-using MonoTouch.UIKit;
-using System.Drawing;
-using MonoTouch.CoreGraphics;
+using UIKit;
+using CoreGraphics;
 
 namespace Cropper.iOS
 {
     public class CropperView : UIView
     {
-        PointF origin;
-        SizeF cropSize;
+        CGPoint origin;
+        CGSize cropSize;
 
         public CropperView ()
         {
-            origin = new PointF (100, 100);
-            cropSize = new SizeF (200, 200);
+            origin = new CGPoint (100, 100);
+            cropSize = new CGSize (200, 200);
 
             BackgroundColor = UIColor.Clear;
             Opaque = false;
@@ -21,7 +19,7 @@ namespace Cropper.iOS
             Alpha = 0.4f;
         }
 
-        public PointF Origin {
+        public CGPoint Origin {
             get {
                 return origin;
             }
@@ -32,7 +30,7 @@ namespace Cropper.iOS
             }
         }
 
-        public SizeF CropSize {
+        public CGSize CropSize {
             get {
                 return cropSize;
             }
@@ -42,13 +40,13 @@ namespace Cropper.iOS
             }
         }
 
-        public RectangleF CropRect {
+        public CGRect CropRect {
             get {
-                return new RectangleF (Origin, CropSize);
+                return new CGRect (Origin, CropSize);
             }
         }
 
-        public override void Draw (RectangleF rect)
+        public override void Draw (CGRect rect)
         {
             base.Draw (rect);
 
@@ -61,7 +59,7 @@ namespace Cropper.iOS
                 UIColor.Clear.SetColor ();
 
                 var path = new CGPath (); 
-                path.AddRect (new RectangleF (origin, cropSize));
+                path.AddRect (new CGRect (origin, cropSize));
 
                 g.AddPath (path);     
                 g.DrawPath (CGPathDrawingMode.Fill);  

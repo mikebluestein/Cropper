@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
-using MonoTouch.UIKit;
-using System.Drawing;
+using UIKit;
+using CoreGraphics;
 
 [assembly:ExportRenderer(typeof(Cropper.CropperPage), typeof(Cropper.iOS.CropperPageRenderer))]
 
@@ -16,10 +16,6 @@ namespace Cropper.iOS
         UIPinchGestureRecognizer pinch;
         UITapGestureRecognizer doubleTap;
 
-        public CropperPageRenderer ()
-        {
-        }
-
         protected override void OnElementChanged (VisualElementChangedEventArgs e)
         {
             base.OnElementChanged (e);
@@ -27,7 +23,7 @@ namespace Cropper.iOS
             var page = e.NewElement as CropperPage;
             var view = NativeView;
 
-            var label = new UILabel (new RectangleF(20, 40, view.Frame.Width-40, 40));
+            var label = new UILabel (new CGRect(20, 40, view.Frame.Width-40, 40));
             label.AdjustsFontSizeToFitWidth = true;
             label.TextColor = UIColor.White;
 
@@ -43,20 +39,20 @@ namespace Cropper.iOS
             base.ViewDidLoad ();
 
             using (var image = UIImage.FromFile ("monkey.png")) {
-                imageView = new UIImageView (new RectangleF (0, 0, image.Size.Width, image.Size.Height));
+                imageView = new UIImageView (new CGRect (0, 0, image.Size.Width, image.Size.Height));
                 imageView.Image = image;
             }
 
             cropperView = new CropperView { Frame = View.Frame };
             View.AddSubviews (imageView, cropperView);
 
-            float dx = 0;
-            float dy = 0;
+            nfloat dx = 0;
+            nfloat dy = 0;
 
-            pan = new UIPanGestureRecognizer ((gesture) => {
-                if ((gesture.State == UIGestureRecognizerState.Began || gesture.State == UIGestureRecognizerState.Changed) && (gesture.NumberOfTouches == 1)) {
+			pan = new UIPanGestureRecognizer (() => {
+                if ((pan.State == UIGestureRecognizerState.Began || pan.State == UIGestureRecognizerState.Changed) && (pan.NumberOfTouches == 1)) {
 
-                    var p0 = gesture.LocationInView (View);
+                    var p0 = pan.LocationInView (View);
 
                     if (dx == 0)
                         dx = p0.X - cropperView.Origin.X;
@@ -64,21 +60,21 @@ namespace Cropper.iOS
                     if (dy == 0)
                         dy = p0.Y - cropperView.Origin.Y;
 
-                    var p1 = new PointF (p0.X - dx, p0.Y - dy);
+                    var p1 = new CGPoint (p0.X - dx, p0.Y - dy);
 
                     cropperView.Origin = p1;
-                } else if (gesture.State == UIGestureRecognizerState.Ended) {
+                } else if (pan.State == UIGestureRecognizerState.Ended) {
                     dx = 0;
                     dy = 0;
                 }
             });
 
-            float s0 = 1;
+            nfloat s0 = 1;
 
-            pinch = new UIPinchGestureRecognizer ((gesture) => {
-                float s = gesture.Scale;
-                float ds = Math.Abs (s - s0);
-                float sf = 0;
+            pinch = new UIPinchGestureRecognizer (() => {
+				nfloat s = pinch.Scale;
+				nfloat ds = (nfloat)Math.Abs (s - s0);
+                nfloat sf = 0;
                 const float rate = 0.5f;
 
                 if (s >= s0) {
@@ -88,17 +84,14 @@ namespace Cropper.iOS
                 }
                 s0 = s;
 
-                cropperView.CropSize = new SizeF (cropperView.CropSize.Width * sf, cropperView.CropSize.Height * sf);  
+                cropperView.CropSize = new CGSize (cropperView.CropSize.Width * sf, cropperView.CropSize.Height * sf);  
 
-                if (gesture.State == UIGestureRecognizerState.Ended) {
+				if (pinch.State == UIGestureRecognizerState.Ended) {
                     s0 = 1;
                 }
             });
 
-            doubleTap = new UITapGestureRecognizer ((gesture) => {
-                Crop();
-
-            }) { 
+            doubleTap = new UITapGestureRecognizer ((gesture) => Crop ()) { 
                 NumberOfTapsRequired = 2, NumberOfTouchesRequired = 1 
             };
 
@@ -118,7 +111,7 @@ namespace Cropper.iOS
                 imageView.Frame = cropperView.CropRect;
                 imageView.Center = View.Center;
 
-                cropperView.Origin = new PointF (imageView.Frame.Left, imageView.Frame.Top);
+                cropperView.Origin = new CGPoint (imageView.Frame.Left, imageView.Frame.Top);
                 cropperView.Hidden = true;
             }
         }
